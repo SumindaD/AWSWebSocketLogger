@@ -26,16 +26,3 @@ def handle(event, context):
         )
 
     return {}
-
-
-## Run this Code in the required lambda
-# import boto3
-# import json
-# lambda_client = boto3.client('lambda')
-
-# def LogAWSWebSocketMessage(message):
-#     lambda_client.invoke(
-#         FunctionName="AWSWebSocketLogger-dev-onMessageHandler",
-#         InvocationType='Event',
-#         Payload=json.dumps({'message': message})
-#     )

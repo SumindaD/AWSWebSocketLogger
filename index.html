@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AWS Websockets</title>
+</head>
+<body>
+    
+</body>
+
+<input id="webSocketConnection" type="text" size="80" value="wss://3lo3vru4ce.execute-api.eu-west-1.amazonaws.com/suminda"><br/><br/>
+<p id="socketState"></p>
+
+Socket Messages:
+<p id="messages"></p>   
+
+<script>
+
+    document.getElementById("socketState").innerHTML = 'Connection Closed';
+
+    webSocketConnection = document.getElementById("webSocketConnection").value;
+
+    var socket = null;
+    
+    function sendMessage(){
+        payload = { "action": "onMessage", "message": document.getElementById("messageInput").value };
+
+        socket.send(JSON.stringify(payload));
+    }
+
+    function connectToWebSocket(){
+        socket = new WebSocket(webSocketConnection);
+
+        socket.onopen = function(event) {
+            document.getElementById("socketState").innerHTML = 'Connection Open';
+        };
+
+        socket.onmessage = function(event) {
+            document.getElementById("messages").innerHTML += event.data + '<br/>'
+        };
+
+        socket.onerror = function(event) {
+            console.error("WebSocket error observed:", event);
+            document.getElementById("socketState").innerHTML = 'Connection Error';
+        };
+
+        socket.onclose = function(event) {
+            document.getElementById("socketState").innerHTML = 'Connection Closed';
+        };
+    }
+
+    function disconnect(){
+        socket.close();
+    }
+
+    connectToWebSocket();
+</script>
+
+</html>

@@ -28,7 +28,7 @@ $ pip install -r python-packages.txt -t ./lib/python
 $ serverless deploy --stage dev
 ```
 
-Make sure to add 'AdministratorAccess' for Lambda Role and Use Following Code (Example in Python) to Send Log messages
+Make sure to add 'LambdaRole' policy for Lambda execution Role and Use Following Code (Example in Python) to Send Log messages
 
 ```shell
 import boto3
